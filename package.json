@@ -1,0 +1,37 @@
+{
+  "name": "@static-pages/yaml-reader",
+  "version": "0.1.0",
+  "description": "YAML reader for static pages.",
+  "main": "index.js",
+  "scripts": {
+    "prepack": "npm run build",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/staticpagesjs/yaml-reader.git"
+  },
+  "keywords": [
+    "yaml",
+    "static-pages",
+    "reader"
+  ],
+  "author": "László BULIK",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/staticpagesjs/yaml-reader/issues"
+  },
+  "homepage": "https://github.com/staticpagesjs/yaml-reader#readme",
+  "dependencies": {
+    "@static-pages/incremental": "0.0.1",
+    "glob": "^7.1.7",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.4",
+    "@types/js-yaml": "^4.0.3",
+    "@types/node": "^16.9.3",
+    "typescript": "^4.4.3"
+  }
+}
