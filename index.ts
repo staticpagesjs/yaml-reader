@@ -24,7 +24,7 @@ export type Data<AttrKey extends string = 'attr'> = {
   [attr in AttrKey]: Record<string, unknown>;
 } : Record<string, unknown>);
 
-export default ({ cwd = 'pages', pattern = '**/*.yaml', incremental, fstat, attrKey = 'attr' }: Options = {}) => ({
+export default ({ cwd = 'pages', pattern = '**/*.yaml', incremental, fstat, attrKey = '' }: Options = {}) => ({
   [Symbol.iterator]() {
     const absCwd = path.resolve(process.cwd(), cwd);
     const files = glob.sync(pattern, { cwd: absCwd, absolute: true });
