@@ -9,9 +9,10 @@ export interface Options {
   pattern?: string;
   incremental?: boolean;
   fstat?: boolean;
+  attrKey?: string;
 }
 
-export interface Data {
+export type Data<AttrKey extends string = 'attr'> = {
   header: {
     cwd: string;
     path: string;
@@ -19,10 +20,11 @@ export interface Data {
     basename: string;
     extname: string;
   } & Partial<fs.Stats>;
-  attr: { [key: string]: unknown };
-}
+} & (AttrKey extends '' ? {
+  [attr in AttrKey]: Record<string, unknown>;
+} : Record<string, unknown>);
 
-export default ({ cwd, pattern = '**/*.yaml', incremental, fstat }: Options = {}) => ({
+export default ({ cwd, pattern = '**/*.yaml', incremental, fstat, attrKey = 'attr' }: Options = {}) => ({
   [Symbol.iterator]() {
     const absCwd = path.resolve(process.cwd(), cwd);
     const files = glob.sync(pattern, { cwd: absCwd, absolute: true });
@@ -47,7 +49,7 @@ export default ({ cwd, pattern = '**/*.yaml', incremental, fstat }: Options = {}
         const relativePath = path.relative(absCwd, file);
         const extName = path.extname(file);
 
-        const yamlData = yaml.load(fs.readFileSync(file, 'utf-8'));
+        const yamlData = yaml.load(fs.readFileSync(file, 'utf-8')) as Record<string, unknown>;
         const data = {
           header: {
             cwd: absCwd,
@@ -57,7 +59,7 @@ export default ({ cwd, pattern = '**/*.yaml', incremental, fstat }: Options = {}
             extname: extName,
             ...(fstat && (incrementalHelper?.fstat || fs.fstatSync(fs.openSync(file, 'r'))))
           },
-          attr: yamlData,
+          ...(attrKey ? { [attrKey]: yamlData } : yamlData),
         };
 
         return { value: data };
