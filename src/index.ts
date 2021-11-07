@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as glob from 'glob';
+import glob from 'glob';
 import * as yaml from 'js-yaml';
 import { IncrementalHelper } from '@static-pages/incremental';
 
