@@ -1,5 +1,7 @@
 # Static Pages / YAML reader
-YAML reader. Reads every file matching a given pattern. Produces an iterable.
+YAML (and JSON) reader. Reads every file matching a given pattern. Produces an iterable.
+
+JSON files are also supported by this package, since JSON is a subset of the YAML spec.
 
 ## Usage
 ```js
@@ -10,6 +12,7 @@ const iterable = reader({
   pattern: '**/*.yaml',
   incremental: false,
   fstat: false,
+  attrKey: 'attr',
 });
 
 // one item in the iterable:
@@ -42,6 +45,7 @@ const iterable = reader({
 #### `Options`
 - `options.cwd` (default: `process.cwd()`) sets the current working directory.
 - `options.pattern` (default: `**/*.yaml`) a glob pattern that marks the files to read.
+- `options.attrKey` (default: (empty)) file contents will be put under this key in the returned data object to prevent polluting the root level (eg. prevent the overwrite of the header field). When left empty the contents are put to the root level.
 - `options.incremental` (default: `false`) return only those files that are newer than the datetime of the end of the last iteration of the files. Alternatively you can suppile a path describing where to store the incremental info. By default it creates a `.incremental` file in the `process.cwd()`.
 - `option.fstat` (default: `false`) merge fstat data into `header`.
 
