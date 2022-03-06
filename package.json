@@ -38,14 +38,12 @@
   },
   "homepage": "https://staticpagesjs.github.io/",
   "dependencies": {
-    "@static-pages/incremental": "0.0.1",
-    "glob": "^7.1.7",
+    "@static-pages/file-reader": "^1.0.1",
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
-    "@types/glob": "^7.1.4",
+    "@types/node": "^14.18.9",
     "@types/js-yaml": "^4.0.3",
-    "@types/node": "^12.20.33",
     "@typescript-eslint/eslint-plugin": "^5.3.0",
     "@typescript-eslint/parser": "^5.3.0",
     "eslint": "^8.2.0",
