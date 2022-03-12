@@ -1,14 +1,14 @@
 import * as yaml from 'js-yaml';
-import reader, { Options as ReaderOptions, Data as ReaderData } from '@static-pages/file-reader';
+import reader, { FileReaderOptions, FileReaderData } from '@static-pages/file-reader';
 
 export interface Options {
-	cwd?: ReaderOptions['cwd'];
-	pattern?: ReaderOptions['pattern'];
-	incremental?: ReaderOptions['incremental'];
+	cwd?: FileReaderOptions['cwd'];
+	pattern?: FileReaderOptions['pattern'];
+	incremental?: FileReaderOptions['incremental'];
 	attrKey?: string;
 }
 
-export type Data<AttrKey extends string = 'attr'> = Pick<ReaderData, 'header'> & (
+export type Data<AttrKey extends string = 'attr'> = Pick<FileReaderData, 'header'> & (
 	AttrKey extends ''
 	? Record<string, unknown>
 	: { [attr in AttrKey]: Record<string, unknown>; }
