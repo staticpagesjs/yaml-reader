@@ -1,5 +1,5 @@
 import * as yaml from 'js-yaml';
-import reader, { FileReaderOptions, FileReaderData } from '@static-pages/file-reader';
+import { fileReader, FileReaderOptions, FileReaderData } from '@static-pages/file-reader';
 
 export interface Options {
 	cwd?: FileReaderOptions['cwd'];
@@ -14,9 +14,9 @@ export type Data<AttrKey extends string = 'attr'> = Pick<FileReaderData, 'header
 	: { [attr in AttrKey]: Record<string, unknown>; }
 );
 
-export default ({ cwd = 'pages', pattern = '**/*.yaml', incremental = false, attrKey = '' }: Options = {}) => ({
+export const yamlReader = ({ cwd = 'pages', pattern = '**/*.yaml', incremental = false, attrKey = '' }: Options = {}) => ({
 	*[Symbol.iterator]() {
-		for (const raw of reader({ cwd, pattern, incremental })) {
+		for (const raw of fileReader({ cwd, pattern, incremental })) {
 			const yamlData = yaml.load(raw.body) as Record<string, unknown>;
 			yield {
 				header: raw.header,
@@ -25,3 +25,5 @@ export default ({ cwd = 'pages', pattern = '**/*.yaml', incremental = false, att
 		}
 	}
 });
+
+export default yamlReader;
