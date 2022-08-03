@@ -1,6 +1,6 @@
 {
   "name": "@static-pages/yaml-reader",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "YAML reader for static pages.",
   "type": "module",
   "main": "cjs/index.js",
